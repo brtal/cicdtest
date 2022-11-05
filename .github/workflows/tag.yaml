@@ -13,7 +13,7 @@ jobs:
         fetch-depth: 0
     - id: determine_tag
       name: Determine Tag
-      run: run |
+      run: |
         tag.sh $GITHUB_SHA
     - name: Create Tag
       if: ${{ steps.determine_tag.outputs.tag_name != '' }}
