@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build All The Things
+      run: |
+        echo "done!"
+
+
+  deploy_dev:
+    name: Deploy to dev
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment:
+      name: dev
+    steps:
+    - name: Deploy to dev
+      run: |
+        echo "done!"
