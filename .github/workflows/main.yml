@@ -12,10 +12,21 @@ jobs:
       run: |
         echo "done!"
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: [build]
+    # continue to deply if testing fails
+    continue-on-error: true
+    steps:
+    - name: Test
+      run: |
+        exit 1
+
   deploy_dev:
     name: Deploy to dev
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [test]
     environment:
       name: dev
     steps:
@@ -26,7 +37,7 @@ jobs:
   deploy_prod:
     name: Deploy to proid
     runs-on: ubuntu-latest
-    needs: [build, deploy_dev]
+    needs: [test, deploy_dev]
     environment:
       name: prod
     steps:
